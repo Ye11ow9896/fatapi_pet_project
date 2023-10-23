@@ -281,7 +281,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "495e69019bacff6ac870b9d16e5dc2d0208cdcd8c1a87ddea8f08e7b5d7b8fce"
+content-hash = "31390fc6f0d301e015b804abdcdd78d61e2344931033546eeb0bc5a513f32efd"
 
 [metadata.files]
 alembic = []

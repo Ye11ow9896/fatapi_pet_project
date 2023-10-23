@@ -12,10 +12,14 @@ class User(BaseModel):
     stat_id: Optional[int]
 
 
-class RequestUser(BaseModel):
+class RequestUserCreateUpdate(BaseModel):
     name: str
     surname: str
+    login: str
+    password: str
     stat_id: Optional[int] = None
 
 
-    
+class RequestUserLogin(BaseModel):
+    login: str
+    password: str
