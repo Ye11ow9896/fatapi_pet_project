@@ -2,7 +2,7 @@ import hashlib
 
 from fastapi.exceptions import HTTPException
 
-from messages import UserMessage
+from messages import UserMessages
 from src.utils.uow import UnitOfWork
 from src.api.user import schemas
 from src.config import SALT
@@ -25,7 +25,7 @@ class UserService:
         hashed_password = self._get_hashed_password(password=data.password)
         if password_hash_db == hashed_password:
             return True
-        raise HTTPException(status_code=423, detail=UserMessage.invalid_psw)
+        raise HTTPException(status_code=423, detail=UserMessages.invalid_psw)
 
     async def add_user(self, new_user: schemas.RequestUserCreateUpdate):
         """

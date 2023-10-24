@@ -33,6 +33,7 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 from src.api.user.models import Base
 from src.api.word_stat.models import Base
+from src.api.weather.models import Base
 
 target_metadata = Base.metadata
 

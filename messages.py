@@ -6,9 +6,15 @@ msg = configparser.ConfigParser()
 msg.read('messages.ini')
 
 
-class UserMessage(str, Enum):
+class UserMessages(str, Enum):
     not_found = msg['user']['not_found']
     updated_success = msg['user']['updated_success']
     deleted_success = msg['user']['deleted_success']
     incorrect_password = msg['user']['incorrect_password']
     login_success = msg['user']['login_success']
+
+
+class RegionMessages(str, Enum):
+    already_exist = msg['region']['already_exist']
+    adding_success = msg['region']['adding_success']
+    not_found = msg['region']['not_found']

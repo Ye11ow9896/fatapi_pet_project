@@ -4,7 +4,7 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 
 from src.database import Base
-from src.api.user.schemas import User
+from src.api.user import schemas
 
 
 class User(Base):   # noqa
@@ -18,7 +18,7 @@ class User(Base):   # noqa
     password: so.Mapped[str] = so.mapped_column(nullable=False)
     stat_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("statistic.id"), nullable=True)
 
-    def to_read_model(self) -> User:
+    def to_read_model(self) -> schemas.User:
         return User(
             id=self.id,
             name=self.name,

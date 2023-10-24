@@ -1,4 +1,4 @@
-2023-10-23 22:55:06,489 - root - ERROR - ================================================================================================================ 
-Address(host='127.0.0.1', port=56452) - "POST http://127.0.0.1:1488/user/login" 'coroutine' object has no attribute 'id' 
-2023-10-23 22:55:45,337 - root - ERROR - ================================================================================================================ 
-Address(host='127.0.0.1', port=39368) - "POST http://127.0.0.1:1488/user/login" 'coroutine' object has no attribute 'id' 
+2023-10-24 23:41:47,580 - root - ERROR - ================================================================================================================ 
+Address(host='127.0.0.1', port=39750) - "POST http://127.0.0.1:1488/user/add" 'RequestUserCreateUpdate' object has no attribute 'model_dump' 
+2023-10-25 00:01:43,442 - root - ERROR - ================================================================================================================ 
+Address(host='127.0.0.1', port=49628) - "POST http://127.0.0.1:1488/weather/addRegion" Can't instantiate abstract class UserRepository with abstract method get_by_name 

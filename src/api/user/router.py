@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 
 from src.api.user import schemas, service
-from messages import UserMessage
+from messages import UserMessages
 
 user_router = APIRouter(
     prefix='/user',
@@ -19,7 +19,7 @@ async def get_user(
 ):
     if user := await user_service.get_user_by_id(id=id):
         return user
-    raise HTTPException(status_code=404, detail=UserMessage.not_found)
+    raise HTTPException(status_code=404, detail=UserMessages.not_found)
 
 
 @user_router.post('/add', response_model=schemas.User, status_code=200)
@@ -44,9 +44,9 @@ async def change(
     user_service: Annotated[service.UserService, Depends(service.UserService)]
 ):
     if not await user_service.get_user_by_id(id=id):
-        raise HTTPException(status_code=404, detail=UserMessage.not_found)
+        raise HTTPException(status_code=404, detail=UserMessages.not_found)
     await user_service.update(user_id=id, data=body)
-    return JSONResponse(status_code=200, content=UserMessage.updated_success)
+    return JSONResponse(status_code=200, content=UserMessages.updated_success)
 
 
 @user_router.delete('/delete', status_code=200)
@@ -55,9 +55,9 @@ async def delete(
     user_service: Annotated[service.UserService, Depends(service.UserService)]
 ):
     if not await user_service.get_user_by_id(id=id):
-        raise HTTPException(status_code=404, detail=UserMessage.not_found)
+        raise HTTPException(status_code=404, detail=UserMessages.not_found)
     await user_service.delete(user_id=id)
-    return JSONResponse(status_code=200, content=UserMessage.deleted_success)
+    return JSONResponse(status_code=200, content=UserMessages.deleted_success)
 
 
 @user_router.post('/login', status_code=200)
@@ -67,6 +67,6 @@ async def login(
 ):
     user = await user_service.get_user_by_login(login=body.login)
     if not user:
-        raise HTTPException(status_code=404, detail=UserMessage.not_found)
+        raise HTTPException(status_code=404, detail=UserMessages.not_found)
     await user_service.check_password(id=user.id, data=body)
-    return JSONResponse(status_code=200, content=UserMessage.deleted_success)
+    return JSONResponse(status_code=200, content=UserMessages.deleted_success)
