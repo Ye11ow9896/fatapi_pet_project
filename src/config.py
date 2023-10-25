@@ -14,4 +14,4 @@ SALT = os.environ.get('SALT')
 TOKEN_SECRET_KEY = os.environ.get('TOKEN_SECRET_KEY')
 AUTH_TOKEN_EXPIRE_TIME = os.environ.get('AUTH_TOKEN_EXPIRE_TIME')
 
-WEATHER_API_KEY = os.environ.get('WEATHER_API_KEY')
+YANDEX_WEATHER_API_TOKEN = os.environ.get('YANDEX_WEATHER_API_TOKEN')
