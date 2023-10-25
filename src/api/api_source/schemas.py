@@ -1,4 +1,11 @@
+import enum
+
 from pydantic import BaseModel
+
+
+class ApiSourceName(str, enum.Enum):
+    yandex = 'YANDEX'
+    other = 'Другой'
 
 
 class ApiSource(BaseModel):

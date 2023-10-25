@@ -18,3 +18,8 @@ class RegionMessages(str, Enum):
     already_exist = msg['region']['already_exist']
     adding_success = msg['region']['adding_success']
     not_found = msg['region']['not_found']
+
+
+class ApiSourceMessages(str, Enum):
+    not_found = msg['api_source']['not_found']
+    already_exist = msg['api_source']['already_exist']

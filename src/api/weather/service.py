@@ -23,13 +23,12 @@ class WeatherService:
         async with UnitOfWork() as uow:
             return await uow.weather.get_region_by_name(name=name)
 
-    async def get_current_weather(self, name: str) -> schemas.Region:
+    async def get_current_weather(self, region: str, api_source: str) -> schemas.Region:
         async with UnitOfWork() as uow:
-            region = await uow.weather.get_region_by_name(name=name)
-        services = await self.api_source_service.get_all_api_source()
+            region = await uow.weather.get_region_by_name(name=region)
+        api_service = await self.api_source_service.get_by_name(name=api_source)
 
-        url = f'https://api.weather.yandex.ru/v2/informers'
         params = {'lat': region.lat, 'lon': region.lon}
-        headers = {'X-Yandex-API-Key': YANDEX_WEATHER_API_TOKEN}
-        result = await Request.get(url=url, params=params, headers=headers)
+        headers = {api_service.header_key: YANDEX_WEATHER_API_TOKEN}
+        result = await Request.get(url=api_service.url, params=params, headers=headers)
         return region

@@ -11,7 +11,7 @@ class UserRepository(GenericSqlRepository[User]):
         super().__init__(a_session, User)
         self._session = a_session
 
-    async def get_user_by_login(self, login: str) -> Optional[User]:
+    async def get_by_login(self, login: str) -> Optional[User]:
         stmt = select(User).where(User.login == login)
         res = await self._session.execute(stmt)
         if data := res.scalar_one_or_none():

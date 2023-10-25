@@ -1,7 +1,11 @@
-from datetime import datetime
-from typing import Optional
+import enum
 
 from pydantic import BaseModel
+
+
+class RegionName(str, enum.Enum):
+    murino = 'Мурино'
+    other = 'Другой'
 
 
 class Region(BaseModel):
