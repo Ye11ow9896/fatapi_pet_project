@@ -31,4 +31,5 @@ class WeatherService:
         params = {'lat': region.lat, 'lon': region.lon}
         headers = {api_service.header_key: YANDEX_WEATHER_API_TOKEN}
         result = await Request.get(url=api_service.url, params=params, headers=headers)
-        return region
+
+        return result.json()

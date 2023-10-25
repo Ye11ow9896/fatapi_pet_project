@@ -35,4 +35,4 @@ async def get_current_weather(
         raise HTTPException(status_code=404, detail=RegionMessages.not_found)
     if not await api_source_service.get_by_name(name=api_source):
         raise HTTPException(status_code=404, detail=ApiSourceMessages.not_found)
-    await weather_service.get_current_weather(region=region, api_source=api_source)
+    return await weather_service.get_current_weather(region=region, api_source=api_source)
