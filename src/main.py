@@ -6,6 +6,7 @@ from fastapi.requests import Request
 from logger.logger import logger_api
 from api.weather.router import weather_router
 from api.user.router import user_router
+from api.api_source.router import api_source_router
 
 
 app = FastAPI()
@@ -22,6 +23,7 @@ app = FastAPI()
 
 app.include_router(user_router)
 app.include_router(weather_router)
+app.include_router(api_source_router)
 
 
 if __name__ == "__main__":

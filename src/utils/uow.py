@@ -1,13 +1,15 @@
 from abc import ABC, abstractmethod
 
-from src.api.weather.repository import WeatherRepository
 from src.database import async_session_maker
+from src.api.weather.repository import WeatherRepository
 from src.api.user.repository import UserRepository
+from src.api.api_source.repository import ApiSourceRepository
 
 
 class UnitOfWorkBase(ABC):
     user: UserRepository
     weather: WeatherRepository
+    api_source: ApiSourceRepository
 
     async def __aenter__(self):
         return self
@@ -32,6 +34,7 @@ class UnitOfWork(UnitOfWorkBase):
         self._session = self._session_factory()
         self.user = UserRepository(self._session)
         self.weather = WeatherRepository(self._session)
+        self.api_source = ApiSourceRepository(self._session)
         return await super().__aenter__()
 
     async def commit(self):

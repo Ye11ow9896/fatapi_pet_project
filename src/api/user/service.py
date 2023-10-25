@@ -17,7 +17,7 @@ class UserService:
     @staticmethod
     async def get_user_by_login(login: str) -> schemas.User:
         async with UnitOfWork() as uow:
-            return await uow.user.get_user_by_login(login=login)
+            return await uow.user.get_by_login(login=login)
 
     async def check_password(self, id: int, data: schemas.RequestUserLogin):
         async with UnitOfWork() as uow:
