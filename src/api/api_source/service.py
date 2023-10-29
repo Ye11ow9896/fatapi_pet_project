@@ -4,7 +4,7 @@ from src.api.api_source import schemas
 
 class ApiSourceService:
     @staticmethod
-    async def add(data: schemas.CreateApiSource) -> schemas.ApiSource:
+    async def add(data: schemas.RequestCreateApiSource) -> schemas.ApiSource:
         async with UnitOfWork() as uow:
             return await uow.api_source.add(data=data.model_dump())
 

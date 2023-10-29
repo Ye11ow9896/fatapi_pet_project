@@ -15,7 +15,7 @@ class UserRepository(GenericSqlRepository[User]):
         stmt = select(User).where(User.login == login)
         res = await self._session.execute(stmt)
         if data := res.scalar_one_or_none():
-            return data.to_read_model()
+            return data.read_table()
         return None
 
     async def get_hash_password_by_id(self, id: int) -> Optional[str]:

@@ -20,6 +20,12 @@ class RequestUserCreateUpdate(BaseModel):
     stat_id: Optional[int] = None
 
 
+class ResponseUserCreateUpdate(BaseModel):
+    name: str
+    login: str
+    stat_id: Optional[int] = None
+
+
 class RequestUserLogin(BaseModel):
     login: str
     password: str

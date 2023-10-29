@@ -6,12 +6,22 @@ from src.utils.requests import Request
 
 class WeatherService:
     @staticmethod
-    async def add_region(new_region: schemas.AddRegion):
+    async def add_region(new_region: schemas.RequestAddRegion):
         async with UnitOfWork() as uow:
             return await uow.weather.add(new_region.model_dump())
 
     @staticmethod
-    async def get_region_by_name(name: str) -> schemas.Region:
+    async def get_region_by_id(id: int):
+        async with UnitOfWork() as uow:
+            return await uow.weather.get_by_id(id=id)
+
+    @staticmethod
+    async def get_regions():
+        async with UnitOfWork() as uow:
+            return await uow.weather.get_all()
+
+    @staticmethod
+    async def get_region_by_name(name: str):
         async with UnitOfWork() as uow:
             return await uow.weather.get_region_by_name(name=name)
 

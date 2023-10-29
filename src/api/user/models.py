@@ -18,7 +18,7 @@ class User(Base):   # noqa
     password: so.Mapped[str] = so.mapped_column(nullable=False)
     stat_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("statistic.id"), nullable=True)
 
-    def to_read_model(self) -> schemas.User:
+    def read_table(self) -> schemas.User:
         return User(
             id=self.id,
             name=self.name,

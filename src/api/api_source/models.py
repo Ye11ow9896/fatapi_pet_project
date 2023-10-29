@@ -16,7 +16,7 @@ class ApiSource(Base):
     url: so.Mapped[str] = so.mapped_column(nullable=False)
     header_key: so.Mapped[str] = so.mapped_column(nullable=False)
 
-    def to_read_model(self) -> schemas.ApiSource:
+    def read_table(self) -> schemas.ApiSource:
         return ApiSource(
             id=self.id,
             name=self.name,

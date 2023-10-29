@@ -40,13 +40,13 @@ class GenericSqlRepository(IGenericRepository[T]):
         stmt = insert(self._model).values(**data).returning(self._model)
         res = await self._session.execute(stmt)
         await self._session.commit()
-        return res.scalar().to_read_model()
+        return res.scalar().read_table()
 
     async def get_by_id(self, id: int) -> Optional[T]:
         stmt = select(self._model).where(self._model.id == id)
         cour = await self._session.execute(stmt)
         if res := cour.scalar_one_or_none():
-            return res.to_read_model()
+            return res.read_table()
         return None
 
     async def update(self, id: int, data: dict) -> Optional[int]:
@@ -64,4 +64,4 @@ class GenericSqlRepository(IGenericRepository[T]):
     async def get_all(self) -> list[T]:
         stmt = select(self._model)
         result = await self._session.execute(stmt)
-        return [row[0].to_read_model() for row in result.all()]
+        return [row[0].read_table() for row in result.all()]

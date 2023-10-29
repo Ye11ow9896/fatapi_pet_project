@@ -18,8 +18,19 @@ class Region(Base):
 
     weather: so.Mapped[List["Weather"]] = so.relationship(back_populates="region")
 
-    def to_read_model(self) -> schemas.Region:
-        return Region(
+    def read_table(self) -> schemas.Region:
+        return schemas.Region(
+            id=self.id,
+            name=self.name,
+            lat=self.lat,
+            lon=self.lon
+        )
+
+    def read_custom(self) -> schemas.CustomRegion:
+        """
+        Возвращаем данные, содержащиеся в таблице и с relationship
+        """
+        return schemas.CustomRegion(
             id=self.id,
             name=self.name,
             lat=self.lat,
@@ -47,8 +58,8 @@ class Weather(Base):
 
     region: so.Mapped["Region"] = so.relationship(back_populates="weather")
 
-    def to_read_model(self) -> schemas.Region:
-        return Region(
+    def read_table(self) -> schemas.Weather:
+        return schemas.Weather(
             id=self.id,
             id_region=self.id_region,
             date=self.date,
@@ -61,6 +72,5 @@ class Weather(Base):
             pressure_pa=self.pressure_pa,
             humidity=self.humidity,
             sunrise=self.sunrise,
-            sunset=self.sunset,
-            region=self.region
+            sunset=self.sunset
         )

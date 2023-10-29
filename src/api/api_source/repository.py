@@ -13,7 +13,7 @@ class ApiSourceRepository(GenericSqlRepository[ApiSource]):
         stmt = select(ApiSource).where(ApiSource.name == name)
         res = await self._session.execute(stmt)
         if data := res.scalar_one_or_none():
-            return data.to_read_model()
+            return data.read_table()
         return None
 
     async def __other_crud_methods(self):

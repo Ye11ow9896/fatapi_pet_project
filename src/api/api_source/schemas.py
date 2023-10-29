@@ -16,7 +16,14 @@ class ApiSource(BaseModel):
     header_key: str
 
 
-class CreateApiSource(BaseModel):
+class RequestCreateApiSource(BaseModel):
+    name: str
+    type: str
+    url: str
+    header_key: str
+
+
+class ResponseCreateApiSource(BaseModel):
     name: str
     type: str
     url: str

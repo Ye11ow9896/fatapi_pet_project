@@ -25,7 +25,7 @@ class UserService:
         hashed_password = self._get_hashed_password(password=data.password)
         if password_hash_db == hashed_password:
             return True
-        raise HTTPException(status_code=423, detail=UserMessages.invalid_psw)
+        raise HTTPException(status_code=423, detail=UserMessages.incorrect_password)
 
     async def add_user(self, new_user: schemas.RequestUserCreateUpdate):
         """
@@ -33,6 +33,8 @@ class UserService:
         """
         new_user.password = self._get_hashed_password(password=new_user.password)
         async with UnitOfWork() as uow:
+            if await uow.user.get_by_login(login=new_user.login):
+                raise HTTPException(status_code=423, detail=UserMessages.login_exist)
             return await uow.user.add(data=new_user.model_dump())
 
     @staticmethod
@@ -45,7 +47,7 @@ class UserService:
             async with UnitOfWork() as uow:
                 return await uow.user.update(id=user_id, data=data.model_dump())
 
-    async def delete(self,user_id: int):
+    async def delete(self, user_id: int):
         if await self.get_user_by_id(id=user_id):
             async with UnitOfWork() as uow:
                 return await uow.user.delete(id=user_id)
