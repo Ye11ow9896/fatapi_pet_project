@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 
 from src.api.weather import schemas, service
 from src.api.api_source import schemas as api_source_schemas
+from src.api.api_source import service as api_source_service
 from messages import RegionMessages, ApiSourceMessages
 
 weather_router = APIRouter(
@@ -29,7 +30,7 @@ async def get_current_weather(
         region: schemas.RegionName,
         api_source: api_source_schemas.ApiSourceName,
         weather_service: Annotated[service.WeatherService, Depends(service.WeatherService)],
-        api_source_service: Annotated[service.ApiSourceService, Depends(service.ApiSourceService)]
+        api_source_service: Annotated[api_source_service.ApiSourceService, Depends(api_source_service.ApiSourceService)]
 ):
     if not await weather_service.get_region_by_name(name=region):
         raise HTTPException(status_code=404, detail=RegionMessages.not_found)
