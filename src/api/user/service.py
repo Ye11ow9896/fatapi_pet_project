@@ -2,6 +2,7 @@ import hashlib
 
 from fastapi.exceptions import HTTPException
 
+from logger import logger
 from messages import UserMessages
 from src.utils.uow import UnitOfWork
 from src.api.user import schemas
@@ -35,7 +36,12 @@ class UserService:
         async with UnitOfWork() as uow:
             if await uow.user.get_by_login(login=new_user.login):
                 raise HTTPException(status_code=423, detail=UserMessages.login_exist)
-            return await uow.user.add(data=new_user.model_dump())
+            try:
+                new_user = await uow.user.add(data=new_user.model_dump())
+                logger.logger.warning(f'Created a new user with id: {new_user.id}')
+            except Exception as e:
+                logger.logger.error(f'An error occurred while creating a new user. {e}')
+        return new_user
 
     @staticmethod
     async def get_all() -> list[schemas.User]:

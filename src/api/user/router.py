@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 
+from logger import logger
 from src.utils.dependencies import d_UserService
 from src.api.user import schemas
 from messages import UserMessages

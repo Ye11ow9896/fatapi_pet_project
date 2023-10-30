@@ -1,7 +1,7 @@
 import httpx
 from typing import Optional
 
-from logger.logger import logger_api
+from logger.logger import logger
 
 
 class Request:
@@ -17,10 +17,10 @@ class Request:
                 response = await request.get(url, timeout=timeout, params=params, headers=headers)
                 response.raise_for_status()
             except httpx.TimeoutException as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
             except httpx.HTTPStatusError as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
 
         return response
@@ -37,10 +37,10 @@ class Request:
                 response = await request.post(url, timeout=timeout, params=params, headers=headers)
                 response.raise_for_status()
             except httpx.TimeoutException as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
             except httpx.HTTPStatusError as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
 
         return response
@@ -57,10 +57,10 @@ class Request:
                 response = await request.put(url, timeout=timeout, params=params, headers=headers)
                 response.raise_for_status()
             except httpx.TimeoutException as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
             except httpx.HTTPStatusError as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
 
         return response
@@ -77,10 +77,10 @@ class Request:
                 response = await request.patch(url, timeout=timeout, params=params, headers=headers)
                 response.raise_for_status()
             except httpx.TimeoutException as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
             except httpx.HTTPStatusError as e:
-                logger_api.error(e)
+                logger.error(e)
                 print(e)
 
         return response
